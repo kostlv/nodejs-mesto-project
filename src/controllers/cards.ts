@@ -66,7 +66,7 @@ export const removeCard = async (req: Request, res: Response, next: NextFunction
       .select('name link owner likes _id createdAt updatedAt')
       .lean()
       .orFail(createNotFoundError(NOT_FOUND_CARD_DATA_ERROR));
-    if (_id !== card.owner) {
+    if (_id !== String(card.owner)) {
       return next(createForbiddenError(COPYRIGHT_ERROR));
     }
     await Card.deleteOne({ _id: card._id });
