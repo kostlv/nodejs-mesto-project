@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { HTTP_STATUS, SERVER_ERROR } from '../utils/constants';
 import { AppError } from '../types/errors';
 
-const serverError = (err: AppError, req: Request, res: Response, next: NextFunction) => {
+const serverError = (err: AppError, _req: Request, res: Response, _next: NextFunction) => {
   const { statusCode = HTTP_STATUS.InternalServerError, message } = err;
   res
     .status(statusCode)
@@ -11,7 +11,6 @@ const serverError = (err: AppError, req: Request, res: Response, next: NextFunct
         ? SERVER_ERROR
         : message,
     });
-  next();
 };
 
 export default serverError;
